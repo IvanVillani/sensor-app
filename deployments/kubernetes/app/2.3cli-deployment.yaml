@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cli-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cli
+  template:
+    metadata:
+      labels:
+        app: cli
+    spec:
+      containers:
+        - name: cli
+          image: seeis/sensor-cli:latest
+          env:
+            - name: CLI_DELTA_DURATION
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: cli-delta-duration
+            - name: CLI_TOTAL_DURATION
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: cli-total-duration
+            - name: CLI_WEB_HOOK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: cli-web-hook-url
+          volumeMounts:
+            - mountPath: /var/lib
+              name: cli-logs
+      volumes:
+        - name: cli-logs
+          persistentVolumeClaim:
+            claimName: cli-logs-pvc

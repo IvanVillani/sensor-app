@@ -1,0 +1,11 @@
+mode: atomic
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:22.193,27.6 3 3
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:27.6,28.10 1 5
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:29.22,30.10 1 2
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:31.11,34.18 2 3
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:40.4,49.50 5 2
+github.com/seeis/sensor-app/sensor/measurement/measurement.go:34.18,38.5 3 1
+github.com/seeis/sensor-app/sensor/measurement/measurement_factory.go:15.76,24.2 2 4
+github.com/seeis/sensor-app/sensor/measurement/measurement_factory.go:27.68,30.36 2 4
+github.com/seeis/sensor-app/sensor/measurement/measurement_factory.go:36.2,39.14 3 1
+github.com/seeis/sensor-app/sensor/measurement/measurement_factory.go:30.36,34.3 3 3

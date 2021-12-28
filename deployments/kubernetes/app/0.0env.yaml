@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-env
+data:
+  influx-init-mode: "setup"
+  influx-init-username: "admin"
+  influx-init-password: "mysecretpass"
+  influx-init-org: "sensor-app-org"
+  influx-init-bucket: "sensor-app-bucket"
+  influx-init-retention: "3d"
+  influx-init-token: "ZqwqPwOAEyQ-d7KiaJIVmrW6hsXAscJh1jxTQJ7QUuIEwTBNpJoTxCtUP84Z-ErH3qUiQqVOjX9BXtdjvAVedA==13"
+  influx-address: "influx-service.default"
+  postgres-user: "admin"
+  postgres-password: "mysecretpass"
+  postgres-db: "sensordb"
+  postgres-port: "5432"
+  postgres-address: "postgres-service.default"
+  backend-address: "backend-service.default"
+  cli-web-hook-url: "http://backend-service.default:8000/api/v1/measurement"
+  cli-delta-duration: "4"
+  cli-total-duration: "9"

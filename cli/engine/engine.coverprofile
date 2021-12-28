@@ -1,0 +1,9 @@
+mode: atomic
+github.com/seeis/sensor-app/sensor/engine/engine.go:18.180,23.16 3 3
+github.com/seeis/sensor-app/sensor/engine/engine.go:47.2,47.29 1 1
+github.com/seeis/sensor-app/sensor/engine/engine.go:23.16,31.7 6 2
+github.com/seeis/sensor-app/sensor/engine/engine.go:31.7,32.11 1 4
+github.com/seeis/sensor-app/sensor/engine/engine.go:33.24,36.11 3 1
+github.com/seeis/sensor-app/sensor/engine/engine.go:37.27,38.34 1 3
+github.com/seeis/sensor-app/sensor/engine/engine.go:42.5,42.30 1 2
+github.com/seeis/sensor-app/sensor/engine/engine.go:38.34,41.6 2 1

@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      server: backend
+  template:
+    metadata:
+      labels:
+        server: backend
+    spec:
+      containers:
+        - name: backend
+          image: seeis/sensor-backend:latest
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-password
+            - name: POSTGRES_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-address
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-db
+            - name: INFLUX_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-address
+          volumeMounts:
+            - mountPath: /var/lib
+              name: backend-logs
+      initContainers:
+        - name: init-influx
+          image: yauritux/busybox-curl
+          env:
+            - name: INFLUX_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-address
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "until curl -f http://$(INFLUX_ADDRESS):8086/ready; do echo waiting $(INFLUX_ADDRESS)for influx; sleep 2; done;",
+            ]
+        - name: init-postgres
+          image: postgres:alpine
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-password
+            - name: POSTGRES_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-address
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-db
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: postgres-port
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "until psql postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_ADDRESS):$(POSTGRES_PORT)/$(POSTGRES_DB) -c SELECT 0; do echo waiting $(INFLUX_ADDRESS)for influx; sleep 2; done;",
+            ]
+      volumes:
+        - name: backend-logs
+          persistentVolumeClaim:
+            claimName: backend-logs-pvc

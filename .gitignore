@@ -1,0 +1,43 @@
+# Compiled class file
+*.class
+**/_output/bin/
+**/__debug_bin
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IntelliJ
+.idea/
+*.iml
+**/.factorypath
+
+# Eclipse
+.project
+.settings
+**/.classpath
+
+# VSCode
+**/.editorconfig
+
+
+# MacOS
+**/.DS_Store
+
+# Password files
+**/tech-user-pass.txt

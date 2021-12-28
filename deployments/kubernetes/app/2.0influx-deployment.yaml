@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: influx
+  template:
+    metadata:
+      labels:
+        db: influx
+    spec:
+      containers:
+        - name: influxdb
+          image: influxdb:2.0
+          env:
+            - name: DOCKER_INFLUXDB_INIT_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-mode
+            - name: DOCKER_INFLUXDB_INIT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-username
+            - name: DOCKER_INFLUXDB_INIT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-password
+            - name: DOCKER_INFLUXDB_INIT_ORG
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-org
+            - name: DOCKER_INFLUXDB_INIT_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-bucket
+            - name: DOCKER_INFLUXDB_INIT_RETENTION
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-retention
+            - name: DOCKER_INFLUXDB_INIT_ADMIN_TOKEN
+              valueFrom:
+                configMapKeyRef:
+                  name: app-env
+                  key: influx-init-token
+          readinessProbe:
+            exec:
+              command: ["curl", "-f", "http://localhost:8086/ping"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+          livenessProbe:
+            exec:
+              command: ["curl", "-f", "http://localhost:8086/ping"]
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+          volumeMounts:
+            - mountPath: /var/lib/influxdb2
+              name: influx-data
+            - mountPath: /etc/influxdb2
+              name: influx-conf
+      volumes:
+        - name: influx-data
+          persistentVolumeClaim:
+            claimName: influx-data-pvc
+        - name: influx-conf
+          persistentVolumeClaim:
+            claimName: influx-conf-pvc

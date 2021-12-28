@@ -1,0 +1,6 @@
+mode: atomic
+github.com/seeis/sensor-app/sensor/client/client.go:14.165,23.16 5 3
+github.com/seeis/sensor-app/sensor/client/client.go:27.2,30.16 3 2
+github.com/seeis/sensor-app/sensor/client/client.go:34.2,34.21 1 1
+github.com/seeis/sensor-app/sensor/client/client.go:23.16,26.3 2 1
+github.com/seeis/sensor-app/sensor/client/client.go:30.16,33.3 2 1

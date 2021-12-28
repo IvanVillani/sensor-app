@@ -1,0 +1,8 @@
+mode: atomic
+github.com/seeis/sensor-app/sensor/opts/opts.go:11.73,12.53 1 4
+github.com/seeis/sensor-app/sensor/opts/opts.go:26.2,26.16 1 1
+github.com/seeis/sensor-app/sensor/opts/opts.go:12.53,13.33 1 3
+github.com/seeis/sensor-app/sensor/opts/opts.go:14.21,15.38 1 2
+github.com/seeis/sensor-app/sensor/opts/opts.go:19.4,20.18 2 1
+github.com/seeis/sensor-app/sensor/opts/opts.go:21.11,23.37 2 1
+github.com/seeis/sensor-app/sensor/opts/opts.go:15.38,18.5 2 1
