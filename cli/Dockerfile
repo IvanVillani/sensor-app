@@ -1,8 +1,8 @@
 FROM golang:1.16.0-buster AS builder
 
-RUN mkdir -p /go/src/github.com/I544091/cli
+RUN mkdir -p /go/src/github.com/seeis/cli
 
-WORKDIR /go/src/github.com/I544091/cli
+WORKDIR /go/src/github.com/seeis/cli
 
 COPY constants ./constants
 COPY engine/engine.go ./engine/
@@ -22,5 +22,5 @@ RUN go build -o cli
 FROM golang:1.16.0-buster
 RUN mkdir -p /var/lib
 WORKDIR /lib
-COPY --from=builder /go/src/github.com/I544091/cli/cli .
+COPY --from=builder /go/src/github.com/seeis/cli/cli .
 CMD ./cli --unit=C --format=JSON --delta_duration=$CLI_DELTA_DURATION --total_duration=$CLI_TOTAL_DURATION --web_hook_url=$CLI_WEB_HOOK_URL

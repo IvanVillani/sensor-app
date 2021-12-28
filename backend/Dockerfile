@@ -1,8 +1,8 @@
 FROM golang:1.16.0-buster AS builder
 
-RUN mkdir -p /go/src/github.com/I544091/backend
+RUN mkdir -p /go/src/github.com/seeis/backend
 
-WORKDIR /go/src/github.com/I544091/backend
+WORKDIR /go/src/github.com/seeis/backend
 
 COPY constants ./constants
 COPY db ./db
@@ -20,7 +20,7 @@ RUN mkdir -p /var/lib
 
 WORKDIR /lib
 
-COPY --from=builder /go/src/github.com/I544091/backend/backend .
+COPY --from=builder /go/src/github.com/seeis/backend/backend .
 
 EXPOSE 8000
 
